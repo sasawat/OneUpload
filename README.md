@@ -29,4 +29,4 @@ Example, uploading the testfolder directory to OneDrive: ./oneupload -d "./testf
 
 #Issues
 
-It doesn't handle timeouts/etc. at login. However, if internet cuts out while uploading files, it will timeout instead of trying to upload forever
+Instead of displaying 100% when finished uploading, displays 199.999...% because the 1 is a single digit and .99... is many digits.
