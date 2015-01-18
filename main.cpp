@@ -29,7 +29,7 @@ static void clearBuf()
 
 std::string getAuthCode()
 {
-	std::cout << "Please navigate to: https://login.live.com/oauth20_authorize.srf?client_id=000000004413537F&scope=wl.signin%20wl.basic%20wl.skydrive_update%20wl.skydrive%20wl.offline_access&client_secret=VFPG2Fh7L1Ja4vNlC1QX2OemaTP7mvij&response_type=code&redirect_uri=https://login.live.com/oauth20_desktop.srf" << std::endl;
+	std::cout << "Please navigate to: https://login.live.com/oauth20_authorize.srf?client_id="+CLIENTID+"&scope=wl.signin%20wl.basic%20wl.skydrive_update%20wl.skydrive%20wl.offline_access&client_secret="+CLIENTSECRET+"&response_type=code&redirect_uri=https://login.live.com/oauth20_desktop.srf" << std::endl;
 	std::cout << "After completing the authentication, please enter the auth code." << 
 		std::endl <<
 		"> ";
@@ -46,7 +46,7 @@ std::string getTokens(std::string authCode)
 	cURLpp::Options::SslVerifyHost optSsl(false);
 	cURLpp::Options::Post optPost(true);
 	cURLpp::Options::HttpHeader optHeaders(std::list<std::string>(1, "Content-type: application/x-www-form-urlencoded"));
-	cURLpp::Options::PostFields optFields("client_id=000000004413537F&redirect_uri=https://login.live.com/oauth20_desktop.srf&client_secret=VFPG2Fh7L1Ja4vNlC1QX2OemaTP7mvij&code="+authCode+"&grant_type=authorization_code");
+	cURLpp::Options::PostFields optFields("client_id="+CLIENTID+"&redirect_uri=https://login.live.com/oauth20_desktop.srf&client_secret="+CLIENTSECRET+"&code="+authCode+"&grant_type=authorization_code");
 	cURLpp::Options::WriteFunction optWFunc(writeToBuf);
 	cURLpp::Easy request;
 	request.setOpt(optUrl.clone());

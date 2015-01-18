@@ -5,6 +5,9 @@
 #include <iostream>
 #include <fstream>
 
+#define CLIENTID std::string("000000004413537F")
+#define CLIENTSECRET std::string("VFPG2Fh7L1Ja4vNlC1QX2OemaTP7mvij")
+
 namespace OneDrive
 {
 class LoginData

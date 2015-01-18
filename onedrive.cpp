@@ -68,7 +68,7 @@ std::string LoginData::accessToken()
 	cURLpp::Options::SslVerifyHost optSsl(false);
 	cURLpp::Options::Post optPost(true);
 	cURLpp::Options::HttpHeader optHeaders(std::list<std::string>(1, "Content-type: application/x-www-form-urlencoded"));
-	cURLpp::Options::PostFields optFields("client_id=000000004413537F&redirect_uri=https://login.live.com/oauth20_desktop.srf&client_secret=VFPG2Fh7L1Ja4vNlC1QX2OemaTP7mvij&refresh_token=" + refreshToken() + "&grant_type=refresh_token");
+	cURLpp::Options::PostFields optFields("client_id="+CLIENTID+"&redirect_uri=https://login.live.com/oauth20_desktop.srf&client_secret="+CLIENTSECRET+"&refresh_token=" + refreshToken() + "&grant_type=refresh_token");
 	cURLpp::Options::WriteFunction optWFunc(writeToBuf);
 	
 	cURLpp::Easy request;
