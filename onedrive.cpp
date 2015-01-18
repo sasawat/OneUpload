@@ -183,7 +183,8 @@ static size_t readFunction(char *buffer, size_t size, size_t nmemb)
 }
 
 bool UpFile::upload()
-{
+{	
+	try{
 	if(_datalen == 0)
 	{
 		return false;
@@ -200,6 +201,8 @@ bool UpFile::upload()
 	cURLpp::Options::Upload optPut(true);
 	cURLpp::Options::InfileSize optSz(_datalen);
 	cURLpp::Options::ReadFunction optRFunc(readFunction);
+	cURLpp::Options::LowSpeedLimit optTimeout1(1);
+	cURLpp::Options::LowSpeedTime optTimeout2(30);
 	cURLpp::Easy request;
 	request.setOpt(optUrl.clone());
 	request.setOpt(optPort.clone());
@@ -208,10 +211,19 @@ bool UpFile::upload()
 	request.setOpt(optRFunc.clone());
 	request.setOpt(optSz.clone());
 	request.setOpt(optWFunc.clone());
+	request.setOpt(optTimeout1.clone());
+	request.setOpt(optTimeout2.clone());
 	clearBuf();
 	request.perform();
 	//std::cout << std::endl;
 	//std::cout << buf;
+	}
+	catch(cURLpp::RuntimeError exception)
+	{
+		std::cout << "Upload failed" << std::endl;
+		std::cout << exception.what() << std::endl;
+		return false;
+	}
 	return true;
 }
 
