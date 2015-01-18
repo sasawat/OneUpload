@@ -1,7 +1,7 @@
 # OneUpload
 Uploads a single file or recursively uploads a directory to Microsoft OneDrive
 
-This was written mainly because I wanted to play around with cURLpp. It's not actually substantially better than just using libcurl, though it does look more fancy and objecty. 
+This was written mainly because I wanted to play around with cURLpp. It's not actually substantially better than just using libcurl, though it does look more fancy and objecty, the underlying workings of libcurl show through pretty strongly. 
 
 #Building:
 
@@ -27,3 +27,6 @@ Uploading a directory: ./oneupload -d dir
 
 Example, uploading the testfolder directory to OneDrive: ./oneupload -d "./testfolder/"
 
+#Issues
+
+It doesn't handle timeouts/etc. at all. If the internet is poor during the upload, it will probably stall indefinitely. 
