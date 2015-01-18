@@ -36,13 +36,13 @@ LoginData::LoginData()
 
 LoginData::LoginData(std::string json)
 {
-	std::cout << json << std::endl << std::endl << std::endl;
+	//std::cout << json << std::endl << std::endl << std::endl;
 	rapidjson::Document doc;
 	doc.Parse(json.c_str());
 	
 	rapidjson::Value& val = doc["refresh_token"];
 	_refreshToken = std::string(val.GetString());
-	std::cout << _refreshToken << std::endl;
+	//std::cout << _refreshToken << std::endl;
 }
 
 LoginData::LoginData(std::istream &from)
@@ -58,6 +58,45 @@ LoginData::LoginData(const LoginData &login)
 void LoginData::writeTo(std::ostream &to)
 {
 	to << _refreshToken;
+}
+
+std::string LoginData::authCode()
+{
+	std::cout << "Please navigate to: https://login.live.com/oauth20_authorize.srf?client_id="+CLIENTID+"&scope=wl.signin%20wl.basic%20wl.skydrive_update%20wl.skydrive%20wl.offline_access&client_secret="+CLIENTSECRET+"&response_type=code&redirect_uri=https://login.live.com/oauth20_desktop.srf" << std::endl;
+	std::cout << "After completing the authentication, please enter the auth code." << 
+		std::endl <<
+		"> ";
+	std::string retval;
+	getline(std::cin, retval);
+	return retval;
+
+}
+
+LoginData LoginData::authorize(std::string code)
+{
+	// Connection options to connect to the MS auth server
+	cURLpp::Options::Url optUrl("https://login.live.com/oauth20_token.srf");
+	cURLpp::Options::Port optPort(443);
+	cURLpp::Options::SslVerifyHost optSsl(false);
+	cURLpp::Options::Post optPost(true);
+	cURLpp::Options::HttpHeader optHeaders(std::list<std::string>(1, "Content-type: application/x-www-form-urlencoded"));
+	cURLpp::Options::PostFields optFields("client_id="+CLIENTID+"&redirect_uri=https://login.live.com/oauth20_desktop.srf&client_secret="+CLIENTSECRET+"&code="+code+"&grant_type=authorization_code");
+	cURLpp::Options::WriteFunction optWFunc(writeToBuf);
+	cURLpp::Easy request;
+	request.setOpt(optUrl.clone());
+	request.setOpt(optPort.clone());
+	request.setOpt(optSsl.clone());
+	request.setOpt(optPost.clone());
+	request.setOpt(optHeaders.clone());
+	request.setOpt(optFields.clone());
+	request.setOpt(optWFunc.clone());
+	clearBuf();
+
+	// Connect to the server
+	request.perform();
+	
+	// Return a LoginData
+	return LoginData(buf);
 }
 
 std::string LoginData::accessToken()

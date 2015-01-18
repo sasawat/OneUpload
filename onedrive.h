@@ -23,6 +23,8 @@ class LoginData
 		LoginData();
 		void writeTo(std::ostream &to);
 		void upload(std::string cloudname, std::string localname);
+		static std::string authCode();
+		static LoginData authorize(std::string code);
 };
 
 class UpFile
