@@ -96,10 +96,9 @@ int main(int argc, char **argv)
 	{
 		return 0;
 	}
-	//std::string loginjson = getTokens(getAuthCode());
-	std::istringstream strum("CkSsSeVaYFYG7!oqNF6R5*st*GIVckdz9VNlcU8guzNHhjGmBmks9E00flkj37OomYeXYr!wjZQjlG!vkIlI2Sq2gdBec9QG!iyzzrZ!23GKG3O7P593bz8dkuSWh9ATViPzro6bNz4TL78VSkJNV8MvwPRTlikqveG3ZvIj0vJGh1VGOsL!Waup7jipOrnKQJVy*kHzqQfVOSsc*PChB4qhhavKkPE2Mm2AYgMxcBJpZFhWmwRR84gJOn940VmS2UYcOeC5m9595ieu4AqjmTDDLnxGzsbKdjcKKUMt6dNkwxxd2*W*Av83X4WZ0mHSLYOQQ3tTU*JBuaQ4xaRD4onrS*aEdax5rDH!ZAhn3Te9PbN35DI9F1HKIrq26qp4qSYgCSt5tDQlOTUZ3RO2Dly63JDqyCOEZVeus7dr!Mq7BjNXkKrou87ETYc3l68QoA$$");
+	std::string loginjson = getTokens(getAuthCode());
 	
-	OneDrive::LoginData loginner(strum);
+	OneDrive::LoginData loginner(loginjson);
 	login = loginner;
 
 	if(argv[1][0] == '-' and argv[1][1] == 'f')
