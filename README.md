@@ -10,11 +10,16 @@ run "make all"
 #Using:
 
 Uploading a single file: ./oneupload -f local cloud
+
 Example, uploading test.txt to hello.txt on OneDrive: ./oneupload -f "./test.txt" "hello.txt"
 
+
 Uploading a single file, keeping name: ./oneupload -f local
+
 Example, uploading testImage.jpg to OneDrive: ./oneupload -f "./testImage.jpg"
 
+
 Uploading a directory: ./oneupload -d dir
+
 Example, uploading the testfolder directory to OneDrive: ./oneupload -d "./testfolder/"
 
