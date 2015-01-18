@@ -55,7 +55,7 @@ LoginData::LoginData(const LoginData &login)
 	_refreshToken = login._refreshToken;
 }
 
-void LoginData::writeTo(std::ostream to)
+void LoginData::writeTo(std::ostream &to)
 {
 	to << _refreshToken;
 }

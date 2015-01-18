@@ -21,7 +21,7 @@ class LoginData
 		LoginData(std::istream &from);
 		LoginData(const LoginData& login);
 		LoginData();
-		void writeTo(std::ostream to);
+		void writeTo(std::ostream &to);
 		void upload(std::string cloudname, std::string localname);
 };
 

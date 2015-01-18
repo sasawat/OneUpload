@@ -96,10 +96,26 @@ int main(int argc, char **argv)
 	{
 		return 0;
 	}
-	std::string loginjson = getTokens(getAuthCode());
-	
-	OneDrive::LoginData loginner(loginjson);
-	login = loginner;
+	if(argv[1][0] == '-' and argv[1][1] == 'l')
+	{
+		std::string loginjson = getTokens(getAuthCode());
+		login = OneDrive::LoginData(loginjson);
+		std::ofstream outfile("login");
+		login.writeTo(outfile);
+		outfile.close();
+		return 0;
+	}
+	std::ifstream storedlogin("login");
+	if(storedlogin.good())
+	{
+		login = OneDrive::LoginData(storedlogin);
+	}
+	else
+	{
+		std::string loginjson = getTokens(getAuthCode());
+		login = OneDrive::LoginData(loginjson);
+	}
+	storedlogin.close();
 
 	if(argv[1][0] == '-' and argv[1][1] == 'f')
 	{
