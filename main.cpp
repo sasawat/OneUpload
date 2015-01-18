@@ -100,12 +100,12 @@ int main(int argc, char **argv)
 	{
 		std::string loginjson = getTokens(getAuthCode());
 		login = OneDrive::LoginData(loginjson);
-		std::ofstream outfile("login");
+		std::ofstream outfile("oneuploadlogin");
 		login.writeTo(outfile);
 		outfile.close();
 		return 0;
 	}
-	std::ifstream storedlogin("login");
+	std::ifstream storedlogin("oneuploadlogin");
 	if(storedlogin.good())
 	{
 		login = OneDrive::LoginData(storedlogin);

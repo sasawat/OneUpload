@@ -9,6 +9,10 @@ run "make all"
 
 #Using:
 
+Creating a login: ./oneupload -l
+
+This prevents you from having to log in each time you use the application. To log out, delete the file login
+
 Uploading a single file: ./oneupload -f local cloud
 
 Example, uploading test.txt to hello.txt on OneDrive: ./oneupload -f "./test.txt" "hello.txt"
