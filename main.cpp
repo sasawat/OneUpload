@@ -52,6 +52,7 @@ static int recursiveUploadCallback(const char *fpath, const struct stat *sb, int
 		// Upload
 		login.upload(cURLpp::escape(std::string(fpath)), fullpath);
 //		std::cout << "\""+std::string(fpath)+"\"" << " " << fullpath << std::endl;
+		std::cout << std::endl;
 	}
 	return 0;
 }
