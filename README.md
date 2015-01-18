@@ -29,4 +29,4 @@ Example, uploading the testfolder directory to OneDrive: ./oneupload -d "./testf
 
 #Issues
 
-It doesn't handle timeouts/etc. at all. If the internet is poor during the upload, it will probably stall indefinitely. 
+It doesn't handle timeouts/etc. at login. However, if internet cuts out while uploading files, it will timeout instead of trying to upload forever
