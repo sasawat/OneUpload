@@ -29,4 +29,8 @@ Example, uploading the testfolder directory to OneDrive: ./oneupload -d "./testf
 
 #Issues
 
+Requires computer to have SSL certificate authority to verify that the program is connecting to an actual Microsoft server. The other option is very insecure. 
+
+oneuploadlogin is insecure. It stores the refreshtoken that can be used to get an accesstoken to your account in plaintext. There is no suitable fix that won't require entering a password to decrypt the login file, which completely misses the point of the login file in the first place. If you care about security /that/ much, do not use -l option. 
+
 Instead of displaying 100% when finished uploading, displays 199.999...% because the 1 is a single digit and .99... is many digits.

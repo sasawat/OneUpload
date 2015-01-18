@@ -78,7 +78,6 @@ LoginData LoginData::authorize(std::string code)
 	// Connection options to connect to the MS auth server
 	cURLpp::Options::Url optUrl("https://login.live.com/oauth20_token.srf");
 	cURLpp::Options::Port optPort(443);
-	cURLpp::Options::SslVerifyHost optSsl(false);
 	cURLpp::Options::Post optPost(true);
 	cURLpp::Options::HttpHeader optHeaders(std::list<std::string>(1, "Content-type: application/x-www-form-urlencoded"));
 	cURLpp::Options::PostFields optFields("client_id="+CLIENTID+"&redirect_uri=https://login.live.com/oauth20_desktop.srf&client_secret="+CLIENTSECRET+"&code="+code+"&grant_type=authorization_code");
@@ -87,7 +86,6 @@ LoginData LoginData::authorize(std::string code)
 	cURLpp::Easy request;
 	request.setOpt(optUrl.clone());
 	request.setOpt(optPort.clone());
-	request.setOpt(optSsl.clone());
 	request.setOpt(optPost.clone());
 	request.setOpt(optHeaders.clone());
 	request.setOpt(optFields.clone());
@@ -114,7 +112,6 @@ std::string LoginData::accessToken()
 	// Connection options to connect to the MS auth server
 	cURLpp::Options::Url optUrl("https://login.live.com/oauth20_token.srf");
 	cURLpp::Options::Port optPort(443);
-	cURLpp::Options::SslVerifyHost optSsl(false);
 	cURLpp::Options::Post optPost(true);
 	cURLpp::Options::HttpHeader optHeaders(std::list<std::string>(1, "Content-type: application/x-www-form-urlencoded"));
 	cURLpp::Options::PostFields optFields("client_id="+CLIENTID+"&redirect_uri=https://login.live.com/oauth20_desktop.srf&client_secret="+CLIENTSECRET+"&refresh_token=" + refreshToken() + "&grant_type=refresh_token");
@@ -124,7 +121,6 @@ std::string LoginData::accessToken()
 	cURLpp::Easy request;
 	request.setOpt(optUrl.clone());
 	request.setOpt(optPort.clone());
-	request.setOpt(optSsl.clone());
 	request.setOpt(optPost.clone());
 	request.setOpt(optHeaders.clone());
 	request.setOpt(optFields.clone());
@@ -215,7 +211,6 @@ bool UpFile::upload()
 	// Connection options to connect to OneDrive server
 	cURLpp::Options::Url optUrl("https://apis.live.net/v5.0/me/skydrive/files/"+_onedriveLoc+"?access_token="+_login.accessToken());
 	cURLpp::Options::Port optPort(443);
-	cURLpp::Options::SslVerifyHost optSsl(false);
 	cURLpp::Options::WriteFunction optWFunc(writeToBuf);
 	cURLpp::Options::Upload optPut(true);
 	cURLpp::Options::InfileSize optSz(_datalen);
@@ -225,7 +220,6 @@ bool UpFile::upload()
 	cURLpp::Easy request;
 	request.setOpt(optUrl.clone());
 	request.setOpt(optPort.clone());
-	request.setOpt(optSsl.clone());
 	request.setOpt(optPut.clone());
 	request.setOpt(optRFunc.clone());
 	request.setOpt(optSz.clone());
